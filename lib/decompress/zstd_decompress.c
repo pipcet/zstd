@@ -19,7 +19,7 @@
  * Note that functions with explicit context such as ZSTD_decompressDCtx() are unaffected.
  */
 #ifndef ZSTD_HEAPMODE
-#  define ZSTD_HEAPMODE 1
+#  define ZSTD_HEAPMODE 0
 #endif
 
 /*!
@@ -67,6 +67,7 @@
 #include "zstd_ddict.h"  /* ZSTD_DDictDictContent */
 #include "zstd_decompress_block.h"   /* ZSTD_decompressBlock_internal */
 #include "../common/bits.h"  /* ZSTD_highbit32 */
+#include <stdlib.h>
 
 #if defined(ZSTD_LEGACY_SUPPORT) && (ZSTD_LEGACY_SUPPORT>=1)
 #  include "../legacy/zstd_legacy.h"
@@ -997,7 +998,6 @@ static size_t ZSTD_decompressMultiFrame(ZSTD_DCtx* dctx,
 
     DEBUGLOG(5, "ZSTD_decompressMultiFrame");
     assert(dict==NULL || ddict==NULL);  /* either dict or ddict set, not both */
-
     if (ddict) {
         dict = ZSTD_DDict_dictContent(ddict);
         dictSize = ZSTD_DDict_dictSize(ddict);

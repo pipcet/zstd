@@ -2681,7 +2681,10 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
    || defined(__aarch64__)  || defined(_M_ARM) \
    || defined(_M_ARM64)     || defined(_M_ARM64EC)
 #    define inline __inline__  /* circumvent a clang bug */
+#ifndef ZSTD_ARCH_ARM_NEON_INCLUDED
+#define ZSTD_ARCH_ARM_NEON_INCLUDED
 #    include <arm_neon.h>
+#endif
 #    undef inline
 #  elif defined(__AVX2__)
 #    include <immintrin.h>

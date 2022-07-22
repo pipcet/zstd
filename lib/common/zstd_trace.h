@@ -30,7 +30,7 @@ extern "C" {
     (defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86) || defined(__aarch64__)) && \
     !defined(__APPLE__) && !defined(_WIN32) && !defined(__MINGW32__) && \
     !defined(__CYGWIN__) && !defined(_AIX)
-#  define ZSTD_HAVE_WEAK_SYMBOLS 1
+#  define ZSTD_HAVE_WEAK_SYMBOLS 0
 #else
 #  define ZSTD_HAVE_WEAK_SYMBOLS 0
 #endif

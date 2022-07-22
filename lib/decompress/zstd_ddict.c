@@ -212,7 +212,7 @@ const ZSTD_DDict* ZSTD_initStaticDDict(
 size_t ZSTD_freeDDict(ZSTD_DDict* ddict)
 {
     if (ddict==NULL) return 0;   /* support free on NULL */
-    {   ZSTD_customMem const cMem = ddict->cMem;
+    {
         ZSTD_customFree(ddict->dictBuffer, cMem);
         ZSTD_customFree(ddict, cMem);
         return 0;

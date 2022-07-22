@@ -1825,10 +1825,6 @@ typedef size_t (*decompressionAlgo)(void* dst, size_t dstSize, const void* cSrc,
 
 size_t HUF_decompress (void* dst, size_t dstSize, const void* cSrc, size_t cSrcSize)
 {
-#if !defined(HUF_FORCE_DECOMPRESS_X1) && !defined(HUF_FORCE_DECOMPRESS_X2)
-    static const decompressionAlgo decompress[2] = { HUF_decompress4X1, HUF_decompress4X2 };
-#endif
-
     /* validation checks */
     if (dstSize == 0) return ERROR(dstSize_tooSmall);
     if (cSrcSize > dstSize) return ERROR(corruption_detected);   /* invalid */
@@ -1845,7 +1841,11 @@ size_t HUF_decompress (void* dst, size_t dstSize, const void* cSrc, size_t cSrcS
         assert(algoNb == 1);
         return HUF_decompress4X2(dst, dstSize, cSrc, cSrcSize);
 #else
-        return decompress[algoNb](dst, dstSize, cSrc, cSrcSize);
+	if (algoNb) {
+	  return HUF_decompress4X2(dst, dstSize, cSrc, cSrcSize);
+	} else {
+	  return HUF_decompress4X1(dst, dstSize, cSrc, cSrcSize);
+	}
 #endif
     }
 }

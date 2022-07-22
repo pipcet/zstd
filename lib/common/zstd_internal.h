@@ -347,10 +347,12 @@ typedef struct {
 const seqStore_t* ZSTD_getSeqStore(const ZSTD_CCtx* ctx);   /* compress & dictBuilder */
 void ZSTD_seqToCodes(const seqStore_t* seqStorePtr);   /* compress, dictBuilder, decodeCorpus (shouldn't get its definition from here) */
 
+#include <stdlib.h>
+
 /* custom memory allocation functions */
-void* ZSTD_customMalloc(size_t size, ZSTD_customMem customMem);
-void* ZSTD_customCalloc(size_t size, ZSTD_customMem customMem);
-void ZSTD_customFree(void* ptr, ZSTD_customMem customMem);
+#define ZSTD_customMalloc(size, dummy) malloc(size)
+#define ZSTD_customCalloc(size, dummy) calloc(size, 1)
+#define ZSTD_customFree(ptr, dummy) free(ptr)
 
 
 /* ZSTD_invalidateRepCodes() :
