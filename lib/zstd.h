@@ -1150,7 +1150,7 @@ ZSTDLIB_API size_t ZSTD_sizeof_DDict(const ZSTD_DDict* ddict);
 #define ZSTD_OVERLAPLOG_MAX       9
 
 #ifndef ZSTD_WINDOWLOG_LIMIT_DEFAULT
-#define ZSTD_WINDOWLOG_LIMIT_DEFAULT 27   /* by default, the streaming decoder will refuse any frame
+#define ZSTD_WINDOWLOG_LIMIT_DEFAULT 31   /* by default, the streaming decoder will refuse any frame
                                            * requiring larger than (1<<ZSTD_WINDOWLOG_LIMIT_DEFAULT) window size,
                                            * to preserve host's memory from unreasonable requirements.
                                            * This limit can be overridden using ZSTD_DCtx_setParameter(,ZSTD_d_windowLogMax,).
